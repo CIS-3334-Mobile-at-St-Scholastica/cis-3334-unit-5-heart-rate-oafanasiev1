@@ -1,5 +1,6 @@
 package css.cis3334.heartratetracker;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Tom Gibbons in Feb 2017.
@@ -49,8 +52,31 @@ public class HeartRateAdapter  extends ArrayAdapter<HeartRate> {
         //get the heart rate we are displaying
         HeartRate hr = hrList.getHeartRate(position);
 
-        TextView tvPulse=(TextView)view.findViewById(R.id.textViewPulse);
+        TextView tvPulse=(TextView)view.findViewById(R.id.Pulse);
+        TextView description = (TextView) view.findViewById(R.id.Description);
         tvPulse.setText(hr.getPulse().toString());
+
+
+        if(hr.getRangeName().equals("Anaerobic")){
+            tvPulse.setTextColor(ContextCompat.getColor(context, R.color.colorRedOrange));
+        }
+        if(hr.getRangeName().equals("Hot zone")){
+            tvPulse.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+        }
+        if(hr.getRangeName().equals("Resting")){
+            tvPulse.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+        }
+        if(hr.getRangeName().equals("Moderate")){
+            tvPulse.setTextColor(ContextCompat.getColor(context, R.color.colorOrangeLight));
+        }
+        if(hr.getRangeName().equals("Endurance")){
+            tvPulse.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
+        }
+        if(hr.getRangeName().equals("Aerobic")){
+            tvPulse.setTextColor(ContextCompat.getColor(context, R.color.colorOrange));
+        }
+        description.setText(hr.getRangeDescrtiption());
+
 
         return(view);
     }
